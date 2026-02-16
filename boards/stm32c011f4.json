@@ -1,0 +1,24 @@
+{
+  "build": {
+    "cpu": "cortex-m0plus",
+    "extra_flags": "-DSTM32C0 -DSTM32C011xx",
+    "f_cpu": "48000000L",
+    "mcu": "stm32c011f4u6",
+    "product_line": "STM32C011xx"
+  },
+  "debug": {
+    "openocd_target": "stm32c0x",
+    "svd_path": "STM32C011.svd",
+    "jlink_device": "STM32C011F4"
+  },
+  "frameworks": ["stm32cube"],
+  "name": "Generic STM32C011F4",
+  "upload": {
+    "maximum_ram_size": 6144,
+    "maximum_size": 16384,
+    "protocol": "stlink",
+    "protocols": ["stlink", "jlink", "blackmagic"]
+  },
+  "url": "https://www.st.com/en/microcontrollers-microprocessors/stm32c011f4.html",
+  "vendor": "STMicroelectronics"
+}
