@@ -1,18 +1,32 @@
 #include "stm32c0xx_hal.h"
+#include "core_cm0plus.h" // або cmsis_gcc.h / cmsis_armclang.h залежно від тулчейну
 
 // Прототипи функцій
 void SystemClock_Config(void);
 // void GPIO_Init(void);
 static void MX_GPIO_Init(void);
 
+volatile uint32_t counter = 0;
+
+static void dbg_primask(const char* tag) {
+    volatile uint32_t p = __get_PRIMASK();
+    (void)tag;
+    (void)p;
+    __NOP(); // тут став брейкпоінт і дивись p
+}
+
 int main(void) {
+    dbg_primask("entry");
     // 1. Ініціалізація бібліотеки HAL
     // Це скидає всі периферійні пристрої та ініціалізує Flash-інтерфейс і Systick.
     HAL_Init(); // Ініціалізація бібліотеки HAL.
+    dbg_primask("after HAL_Init");
 
     // 2. Налаштування системи тактування
     // Для STM32C0 за замовчуванням використовується внутрішній генератор HSI48.
     SystemClock_Config(); // Налаштування тактування чипа.
+    dbg_primask("after SystemClock_Config");
+    // __enable_irq();
 
     // 3. Ініціалізація ніжки PA0 як виходу
     MX_GPIO_Init();
@@ -26,6 +40,8 @@ int main(void) {
         HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_0);
 
         // Затримка у 500 мілісекунд (0.5 секунди)
+
+        counter++;
         HAL_Delay(100);
     }
 }
