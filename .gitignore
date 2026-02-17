@@ -57,4 +57,4 @@ dkms.conf
 #other
 .vscode/
 .pio/
-packages/*
+packages/
