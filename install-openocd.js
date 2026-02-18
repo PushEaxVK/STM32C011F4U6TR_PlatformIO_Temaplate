@@ -111,7 +111,7 @@ async function main() {
   try { fs.unlinkSync(DOWNLOAD_PATH); } catch {}
 
   const openocdExe = path.join(EXTRACT_DIR, "bin", "openocd.exe");
-  const scriptsDir = path.join(EXTRACT_DIR, "share", "openocd", "scripts");
+  const scriptsDir = path.join(EXTRACT_DIR, "openocd", "scripts");
 
   console.log("\nDONE.");
   console.log("OpenOCD:", openocdExe);
